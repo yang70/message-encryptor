@@ -12,69 +12,8 @@
       <br>
       <button id="encrypt" onclick="encoder.protect()">Lock Down</button>
     </div>
-
-    <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
-
-    <script>
-      var encoder = {
-        setMessage: function() {
-          this.message = document.getElementById("message").value;
-        },
-        getPassword: function() {
-          this.password = prompt("What pass phrase will protect this message?");
-        },
-        setUrl: function() {
-          var instructions = "Your encrypted message is available to anyone with the passphrase at:\n\n";
-          this.newUrl = instructions + window.location.href + "?" + this.encrypt();
-        },
-        replaceMessageWithUrl: function () {
-          document.getElementById("message").value=this.newUrl;
-        },
-        encrypt: function() {
-          cypher = CryptoJS.AES.encrypt(this.message, this.password)
-          console.log("Verified: " +
-            CryptoJS.AES.decrypt(cypher, this.password).toString(CryptoJS.enc.Utf8))
-          return cypher
-        },
-        protect: function() {
-          this.setMessage()
-          this.getPassword()
-          this.setUrl()
-          this.replaceMessageWithUrl()
-        }
-      }
-      var decoder = {
-        setHash: function() {
-          this.secret = window.location.search.substring(1);
-        },
-        getPassword: function() {
-          this.password = prompt("Please enter the pass phrase.");
-        },
-        decrypt: function() {
-          this.setHash();
-          this.getPassword();
-          this.plainMessage = CryptoJS.AES.decrypt(this.secret, this.password).toString(CryptoJS.enc.Utf8);
-          alert(this.plainMessage);
-        }
-      }
-      var checkPage = function(){
-        if(window.location.href.length > "http://localhost:4000/".length){
-          document.getElementById("header").innerHTML = "Message Decoder";
-          document.getElementById("p1").innerHTML = "This URL contains a securly encrypted method.";
-          document.getElementById("p2").innerHTML = "Are you ready to enter your pass phrase?";
-          var textArea = document.getElementById("message");
-          var oldButton = document.getElementById("encrypt");
-          var parent = document.getElementById("inputDiv");
-          parent.removeChild(textArea);
-          parent.removeChild(oldButton);
-          var newButton = document.createElement("button");
-          newButton.innerHTML = "Decrypt";
-          newButton.setAttribute("id", "decrypt");
-          newButton.setAttribute("onclick", "decoder.decrypt()");
-          parent.appendChild(newButton);
-        }
-      };
-      checkPage();
-    </script>
+    <script src="js/encryptor.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/crypto.js"></script>
   </body>
 </html>
