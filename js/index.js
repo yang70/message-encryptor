@@ -19,6 +19,7 @@ var encoder = {
     return encryptor.getCypher(this.message, this.password);
   },
   protect: function() {
+    console.log(this)
     this.setMessage()
     this.getPassword()
     this.setUrl()
@@ -55,8 +56,14 @@ var checkPage = function(){
     var newButton = document.createElement("button");
     newButton.innerHTML = "Decrypt";
     newButton.setAttribute("id", "decrypt");
-    newButton.setAttribute("onclick", "decoder.decrypt()");
     parent.appendChild(newButton);
+    newButton.addEventListener("click", decoder.decrypt.bind(decoder), false);
   }
 };
 checkPage();
+
+window.addEventListener("DOMContentLoaded", function(){
+  document.getElementById("encrypt")
+    .addEventListener("click", encoder.protect.bind(encoder), false);
+}, false);
+
