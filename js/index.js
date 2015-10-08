@@ -19,7 +19,6 @@ var encoder = {
     return encryptor.getCypher(this.message, this.password);
   },
   protect: function() {
-    console.log(this)
     this.setMessage()
     this.getPassword()
     this.setUrl()
