@@ -4,6 +4,9 @@ var encoder = {
   },
   getPassword: function() {
     this.password = prompt("What pass phrase will protect this message?");
+    while(!this.password){
+      this.password = prompt("Password cannot be blank.\n\nWhat pass phrase will protect this message?");
+    }
   },
   setUrl: function() {
     var instructions = "Your encrypted message is available to anyone with the passphrase at:\n\n";
@@ -28,6 +31,9 @@ var decoder = {
   },
   getPassword: function() {
     this.password = prompt("Please enter the pass phrase.");
+    while(!this.password){
+      this.password = prompt("Password cannot be blank.\n\nWhat pass phrase will protect this message?");
+    }
   },
   decrypt: function() {
     this.setHash();
